@@ -1,7 +1,6 @@
 from collections import deque
 from imutils.video import VideoStream
 import numpy as np
-import argparse
 import cv2 as cv
 import imutils
 import time
@@ -30,10 +29,10 @@ while True:
 	hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
 
     #Defining lower and upper bounds for both brighter and darker shades of red to improve accurracy
-	bright_red_lower = (0, 100, 100)
+	bright_red_lower = (0, 125, 125)
 	bright_red_upper = (10, 255, 255)
 	bright_red_mask = cv.inRange(hsv, bright_red_lower, bright_red_upper)
-	dark_red_lower = (160, 100, 100)
+	dark_red_lower = (160, 125, 125)
 	dark_red_upper = (179, 255, 255)
 	dark_red_mask = cv.inRange(hsv, dark_red_lower, dark_red_upper)
 	
@@ -66,7 +65,7 @@ while True:
 		if radius > 15:
 			# draw the circle and centroid on the frame
 			cv.circle(frame, (int(x), int(y)), int(radius),
-				(0, 255, 255), 2)
+				(0, 255, 0), 2)
 			cv.circle(frame, center, 5, (0, 0, 255), -1)
 	# update the points queue
 	pts.appendleft(center)
