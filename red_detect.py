@@ -17,11 +17,11 @@ def image_detect(path):
     
 
     #Defining lower and upper bounds for both brighter and darker shades of red to improve accurracy
-    bright_red_lower = (0, 100, 100)
+    bright_red_lower = (0, 125, 125)
     bright_red_upper = (10, 255, 255)
     bright_red_mask = cv.inRange(hsv, bright_red_lower, bright_red_upper)
 
-    dark_red_lower = (160, 100, 100)
+    dark_red_lower = (160, 125, 125)
     dark_red_upper = (179, 255, 255)
     dark_red_mask = cv.inRange(hsv, dark_red_lower, dark_red_upper)
  
@@ -37,8 +37,8 @@ def image_detect(path):
     dilated = cv.dilate(eroded,dilate)
 
     detected_circles = cv.HoughCircles(
-        dilated, cv.HOUGH_GRADIENT, 1, 150,
-        param1=100, param2=20, minRadius=20, maxRadius=250
+        dilated, cv.HOUGH_GRADIENT, 1, 200,
+        param1=100, param2=22, minRadius=20, maxRadius=250
     )
 
     # on the color-masked, blurred and morphed image I apply the cv2.HoughCircles-method to detect circle-shaped objects 
@@ -58,26 +58,30 @@ def image_detect(path):
         
         
 if __name__=='__main__':
-    #Red data
+    #Red data --Pass
     image_detect(r"sample_data\big_red_ball.jpg")
     image_detect(r"sample_data\images\IMG_2283_JPG.rf.dae46b04cd7985cfb7f4f48f8e7f783c.jpg")
     image_detect(r"sample_data\images\IMG_2475_JPG.rf.702f60bb59fa116f1f67b1fe83a90baa.jpg")
     image_detect(r"sample_data\images\IMG_2536_JPG.rf.ed09afe0859409575e91c8b2efb32bc8.jpg")
     image_detect(r"sample_data\images\IMG_2423_JPG.rf.214d8481c8af897a0ad9210e8c710de3.jpg")
     image_detect(r'sample_data\images\IMG_2407_JPG.rf.48898a4bcf29d35d2150cada340e59d8.jpg')
-    image_detect(r"sample_data\images\IMG_2422_JPG.rf.07e7c031fac51803bdc7d0790323d012.jpg")
-    image_detect(r"sample_data\test_Red.jpg")
     image_detect(r"sample_data\cricket_red.jpg")
-    image_detect(r"sample_data\multi_red.jpg")
     image_detect(r"sample_data\red_shiny.jpg")
+
+    image_detect(r"yolo\data\images\01d339a8-14_jpg.rf.71b6ee9f3259eea33b285c4608da9837.jpg")
+    # image_detect(r"")
+    # image_detect(r"")
+    # image_detect(r"")
+
+
+    #Fail
     image_detect(r"sample_data\red_all.jpg")
-
-    #Non-Red Data
-
+    image_detect(r"sample_data\multi_red.jpg")
     image_detect(r"sample_data\mix_ball.jpg")
     image_detect(r"sample_data\Not_red.jpg")
+    image_detect(r"sample_data\test_Red.jpg")
+    image_detect(r"sample_data\images\IMG_2422_JPG.rf.07e7c031fac51803bdc7d0790323d012.jpg")
+    image_detect(r"yolo\data\images\f33b2868-frame_04850_png.rf.f81fcfcfe964aa2e45269cd0e5e58f67.jpg")
 
 
 
-
-        
